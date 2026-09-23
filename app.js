@@ -48,9 +48,9 @@ function getStoredVisibility() {
   } catch {
     return "public";
   }
-
-  let currentVisibility = getStoredVisibility();
 }
+
+let currentVisibility = getStoredVisibility();
 
 document.querySelectorAll(".deposit-button").forEach((button) => {
   button.addEventListener("click", () => {
