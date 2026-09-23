@@ -43,7 +43,11 @@ function applyVisibility(visibility) {
 }
 
 function getStoredVisibility() {
-  return localStorage.getItem(visibilityStorageKey) || "public";
+  try {
+    return localStorage.getItem(visibilityStorageKey) || "public";
+  } catch {
+    return "public";
+  }
 }
 
 document.querySelectorAll(".deposit-button").forEach((button) => {
@@ -173,7 +177,9 @@ settingsBackdrop.addEventListener("click", (event) => {
 
 document.querySelector("#save-privacy-setting").addEventListener("click", () => {
   const selectedVisibility = conversationVisibilitySelect.value === "private" ? "private" : "public";
-  localStorage.setItem(visibilityStorageKey, selectedVisibility);
+  try {
+    localStorage.setItem(visibilityStorageKey, selectedVisibility);
+  } catch {}
   applyVisibility(selectedVisibility);
   closeSettings();
 });
