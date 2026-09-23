@@ -158,8 +158,7 @@ document.querySelector("#confirm-action").addEventListener("click", () => {
   }, 1500);
 });
 
-privacySettingsLink.addEventListener("click", (event) => {
-  event.preventDefault();
+privacySettingsLink.addEventListener("click", () => {
   applyVisibility(getStoredVisibility());
   settingsBackdrop.classList.add("visible");
   settingsBackdrop.setAttribute("aria-hidden", "false");
