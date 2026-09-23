@@ -48,6 +48,8 @@ function getStoredVisibility() {
   } catch {
     return "public";
   }
+
+  let currentVisibility = getStoredVisibility();
 }
 
 document.querySelectorAll(".deposit-button").forEach((button) => {
@@ -163,7 +165,7 @@ document.querySelector("#confirm-action").addEventListener("click", () => {
 });
 
 privacySettingsLink.addEventListener("click", () => {
-  applyVisibility(getStoredVisibility());
+  applyVisibility(currentVisibility);
   settingsBackdrop.classList.add("visible");
   settingsBackdrop.setAttribute("aria-hidden", "false");
   conversationVisibilitySelect.focus();
@@ -177,6 +179,7 @@ settingsBackdrop.addEventListener("click", (event) => {
 
 document.querySelector("#save-privacy-setting").addEventListener("click", () => {
   const selectedVisibility = conversationVisibilitySelect.value === "private" ? "private" : "public";
+  currentVisibility = selectedVisibility;
   try {
     localStorage.setItem(visibilityStorageKey, selectedVisibility);
   } catch {}
@@ -184,7 +187,7 @@ document.querySelector("#save-privacy-setting").addEventListener("click", () => 
   closeSettings();
 });
 
-applyVisibility(getStoredVisibility());
+applyVisibility(currentVisibility);
 
 document.querySelectorAll("[data-scroll]").forEach((button) => {
   button.addEventListener("click", () => document.querySelector(button.dataset.scroll).scrollIntoView({ behavior: "smooth" }));
